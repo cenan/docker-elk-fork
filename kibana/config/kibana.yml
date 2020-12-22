@@ -1,0 +1,21 @@
+---
+## Default Kibana configuration from Kibana base image.
+## https://github.com/elastic/kibana/blob/master/src/dev/build/tasks/os_packages/docker_generator/templates/kibana_yml.template.js
+#
+server.name: kibana
+server.host: "0"
+elasticsearch.hosts: [ "http://elasticsearch:9200" ]
+xpack.monitoring.ui.container.elasticsearch.enabled: true
+
+## X-Pack security credentials
+#
+elasticsearch.username: elastic
+elasticsearch.password: changeme
+
+csp.rules:
+  # current defaults
+  - "script-src 'unsafe-eval' 'nonce-{nonce}'"
+  - "worker-src blob'"
+  - "child-src blob:"
+  # New rule for iframes
+  - "frame-src http://localhost:3000/"
